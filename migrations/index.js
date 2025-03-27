@@ -3,10 +3,8 @@ import config from "../config.js";
 import user from "../models/user.js";
 import task from "../models/task.js";
 import fs from "fs";
-
-const localeUrl = config.db.URL;
-
-const sequelize = new Sequelize(localeUrl, {
+console.log(config.db.URL)
+const sequelize = new Sequelize(config.db.URL, {
   dialect: config.db.dialect,
   logging: false,
   dialectOptions: {
