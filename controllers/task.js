@@ -75,7 +75,7 @@ taskController.updateById = async (userId, id, value) => {
 taskController.deleteById = async (userId, id) => {
   const filter = {
     where: {
-      // userId,
+      userId,
       id,
     },
   };
