@@ -1,6 +1,6 @@
 export default function (sequelize, DataTypes) {
   const Task = sequelize.define(
-    "Task",
+    'Task',
     {
       title: {
         type: DataTypes.STRING,
@@ -12,9 +12,9 @@ export default function (sequelize, DataTypes) {
       priority: {
         type: DataTypes.STRING,
         allowNull: false,
-        defaultValue: "low",
+        defaultValue: 'low',
         validate: {
-          isIn: [["low", "medium", "high"]],
+          isIn: [['low', 'medium', 'high']],
         },
       },
       dueDate: {
@@ -24,9 +24,9 @@ export default function (sequelize, DataTypes) {
       status: {
         type: DataTypes.STRING,
         allowNull: false,
-        defaultValue: "pending",
+        defaultValue: 'pending',
         validate: {
-          isIn: [["pending", "completed"]],
+          isIn: [['pending', 'completed']],
         },
       },
     },
@@ -36,7 +36,7 @@ export default function (sequelize, DataTypes) {
   Task.associate = (models) => {
     Task.belongsTo(models.User, {
       foreignKey: {
-        fieldName: "userId",
+        fieldName: 'userId',
       },
     });
   };

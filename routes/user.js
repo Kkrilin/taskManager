@@ -1,16 +1,14 @@
-import express from "express";
-import userService from "../services/user.js";
-import userMiddleWare from "../middleware/userAuth.js";
+import express from 'express';
+import userService from '../services/user.js';
+import userMiddleWare from '../middleware/userAuth.js';
 
 const router = express();
 
 router.post(
-  "/register",
+  '/register',
   userMiddleWare.validateSignUP,
   userService.registerUser
 );
-router.post("/login", userMiddleWare.validateLogin, userService.login);
+router.post('/login', userMiddleWare.validateLogin, userService.login);
 
 export default router;
-
-

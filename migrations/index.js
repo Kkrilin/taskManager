@@ -1,9 +1,9 @@
-import { Sequelize, DataTypes } from "sequelize";
-import config from "../config.js";
-import user from "../models/user.js";
-import task from "../models/task.js";
-import fs from "fs";
-console.log(config.db.URL)
+import { Sequelize, DataTypes } from 'sequelize';
+import config from '../config.js';
+import user from '../models/user.js';
+import task from '../models/task.js';
+import fs from 'fs';
+console.log(config.db.URL);
 const sequelize = new Sequelize(config.db.URL, {
   dialect: config.db.dialect,
   logging: false,
@@ -31,10 +31,10 @@ db.Op = Op;
 db.sequelize
   .sync({ force: false }) // Drops and recreates tables on restart
   .then(async () => {
-    console.log("Database connected");
+    console.log('Database connected');
   })
   .catch((err) => {
-    console.log("Failed to sync db: " + err);
+    console.log('Failed to sync db: ' + err);
   });
 
 db.User = user(sequelize, DataTypes);

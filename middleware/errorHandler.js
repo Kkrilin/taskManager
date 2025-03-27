@@ -1,10 +1,10 @@
 const errorHandler = (err, req, res, next) => {
-  console.error("error", err.stack); // Log the error stack for debugging
+  console.error('error', err.stack); // Log the error stack for debugging
   const statusCode = err.status || 500;
-  console.log(statusCode, "statusCode");
+  console.log(statusCode, 'statusCode');
   res.status(statusCode).json({
     success: 0,
-    message: err.message || "Internal Server Error",
+    message: err.message || 'Internal Server Error',
   });
 };
 

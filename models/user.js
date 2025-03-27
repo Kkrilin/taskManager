@@ -1,6 +1,6 @@
 export default function (sequelize, DataTypes) {
   const User = sequelize.define(
-    "User",
+    'User',
     {
       name: {
         type: DataTypes.STRING,
@@ -22,7 +22,7 @@ export default function (sequelize, DataTypes) {
 
   User.associate = (models) => {
     User.hasMany(models.Task, {
-      foreignKey: "userId",
+      foreignKey: 'userId',
     });
   };
 

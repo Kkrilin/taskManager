@@ -1,20 +1,21 @@
-import db from "../migrations/index.js";
+import db from '../migrations/index.js';
 
 const task = db.Task;
 const user = db.User;
+const Op = db.Op;
 
 const taskController = {};
 
 // taskController.createTask = async () => {}
 
 const sortingObjMap = {
-  asc: "ASC",
-  desc: "DESC",
+  asc: 'ASC',
+  desc: 'DESC',
 };
 
 const filterObject = {
-  priority: ["low", "medium", "high"],
-  status: ["pending", "completed"],
+  priority: ['low', 'medium', 'high'],
+  status: ['pending', 'completed'],
 };
 taskController.findAllForListing = async (userId, query = {}) => {
   const filter = {
@@ -42,11 +43,11 @@ taskController.findAllForListing = async (userId, query = {}) => {
   }
 
   if (query.dueDate && sortingObjMap[query.dueDate]) {
-    filter.order.push(["dueDate", sortingObjMap[query.dueDate]]);
+    filter.order.push(['dueDate', sortingObjMap[query.dueDate]]);
   }
 
   if (query.prioritySort && sortingObjMap[query.prioritySort]) {
-    filter.order.push(["priority", sortingObjMap[query.prioritySort]]);
+    filter.order.push(['priority', sortingObjMap[query.prioritySort]]);
   }
   return task.findAll(filter);
 };
