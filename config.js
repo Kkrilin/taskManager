@@ -12,6 +12,7 @@ const config = {
     dialect: process.env.DIALECT,
   },
   secretKey: process.env.SECRET_KEY,
+  jwtExpiration: process.env.JWT_EXPIRATION,
 };
 
 export default config;

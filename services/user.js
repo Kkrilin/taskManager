@@ -33,7 +33,7 @@ userService.login = async function (req, res, next) {
       const isSame = await bcrypt.compare(password, user.password);
       if (isSame) {
         let token = jwt.sign({ id: user.id }, config.secretKey, {
-          expiresIn: '1d',
+          expiresIn: config.jwtExpiration,
         });
         res.cookie('jwt', token, {
           maxAge: 24 * 60 * 60 * 1000,
