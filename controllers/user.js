@@ -48,6 +48,7 @@ UserController.findAllForListing = async (userId) => {
         // attributes: ["title", "description", "priority"],
       },
     ],
+    limit: 5,
   };
   return user.findAll(filter);
 };

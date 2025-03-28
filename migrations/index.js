@@ -1,4 +1,4 @@
-import { Sequelize, DataTypes } from 'sequelize';
+import { Sequelize, DataTypes, Op } from 'sequelize';
 import config from '../config.js';
 import user from '../models/user.js';
 import task from '../models/task.js';
@@ -26,7 +26,6 @@ const db = {};
 
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
-const { Op } = Sequelize;
 db.Op = Op;
 db.sequelize
   .sync({ force: false }) // Drops and recreates tables on restart
