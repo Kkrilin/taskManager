@@ -4,6 +4,7 @@ import swaggerSpec from './swagger.js';
 import config from './config.js';
 import cookieParser from 'cookie-parser';
 import morgan from 'morgan';
+import cors from 'cors';
 
 import userRouter from './routes/users.js';
 import taskRouter from './routes/tasks.js';
@@ -18,6 +19,7 @@ app.use(morgan(config.env || 'combined'));
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cors());
 // Serve Swagger documentation
 
 app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerSpec));
