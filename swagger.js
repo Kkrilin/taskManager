@@ -1,4 +1,5 @@
 import swaggerJsdoc from 'swagger-jsdoc';
+import config from './config';
 
 const swaggerOptions = {
   definition: {
@@ -10,7 +11,7 @@ const swaggerOptions = {
     },
     servers: [
       {
-        url: 'http://localhost:3000', // Replace with your server URL
+        url: config.url, // Replace with your server URL
         description: 'Development server',
       },
     ],
