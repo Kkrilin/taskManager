@@ -1,4 +1,4 @@
-import db from '../migrations/index.js';
+import db from '../models/index.js';
 import bcrypt from 'bcrypt';
 
 const user = db.User;
