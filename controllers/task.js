@@ -22,10 +22,13 @@ const filterObject = {
   status: ['pending', 'completed'],
 };
 
+// query to assign proority value as integer to sort
 const queryForPrioritySort = `case when priority = 'low' then 1
                                     when priority = 'medium' then 2
                                     when priority = 'high' then 3
                                     end`;
+
+// tasks for listing with pagination, filtering and sorting
 taskController.findAllForListing = async (userId, query = {}) => {
   const filter = {
     where: {
@@ -76,6 +79,7 @@ taskController.findAllForListing = async (userId, query = {}) => {
   return task.findAll(filter);
 };
 
+// get task by id
 taskController.findOneById = async (userId, id) => {
   const filter = {
     where: {
@@ -86,6 +90,7 @@ taskController.findOneById = async (userId, id) => {
   return task.findOne(filter);
 };
 
+// update task by id
 taskController.updateById = async (userId, id, value) => {
   const filter = {
     where: {
@@ -96,6 +101,7 @@ taskController.updateById = async (userId, id, value) => {
   return task.update(value, filter);
 };
 
+// delete task by id (soft delete)
 taskController.deleteById = async (userId, id) => {
   const filter = {
     where: {

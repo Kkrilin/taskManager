@@ -3,29 +3,26 @@ import config from '../config.js';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 
-const userService = {};
-
-userService.registerUser = async function (req, res, next) {
+export const registerUser = async function (req, res, next) {
   const value = req.body;
   try {
     const user = await UserController.registerUser(value);
     if (user) {
       let token = jwt.sign({ id: user.id }, config.secretKey, {
-        expiresIn: '1d',
+        expiresIn: config.jwtExpiration,
       });
       res.cookie('jwt', token, { maxAge: 24 * 60 * 60 * 1000, httpOnly: true });
-      res.status(201).json({ success: 1, userId: user.id });
+      res.status(201).json({ success: 1, userId: user.id, token });
     } else {
       res.status(409).send({ success: 0, message: 'Details are not correct' });
     }
   } catch (error) {
     error.status = 409;
     next(error);
-    // res.status(500).json({ success: 0, message: error.message });
   }
 };
 
-userService.login = async function (req, res, next) {
+export const login = async function (req, res, next) {
   try {
     const { email, password } = req.body;
     const user = await UserController.findOneByEmail(email);
@@ -40,18 +37,15 @@ userService.login = async function (req, res, next) {
           httpOnly: true,
         });
         const userWithTask = await UserController.findAllForListing(user.id);
-        res.status(200).json({ success: 1, user: userWithTask });
+        res.status(200).json({ success: 1, user: userWithTask, token });
       } else {
-        res.status(401).json({ success: 0, message: 'Authentication failed' });
+        throw new Error('Authentication failed');
       }
     } else {
-      res.status(401).json({ success: 0, message: 'Authentication failed' });
+      throw new Error('Authentication failed');
     }
   } catch (error) {
     error.status = 401;
     next(error);
-    // res.status(500).json({ success: 0, message: error.message });
   }
 };
-
-export default userService;

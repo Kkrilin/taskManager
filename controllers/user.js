@@ -6,6 +6,7 @@ const task = db.Task;
 
 const UserController = {};
 
+// find user by name
 UserController.findOneByName = (name) => {
   const filter = {
     where: {
@@ -15,6 +16,7 @@ UserController.findOneByName = (name) => {
   return user.findOne(filter);
 };
 
+// find user by email
 UserController.findOneByEmail = (email) => {
   const filter = {
     where: {
@@ -24,6 +26,7 @@ UserController.findOneByEmail = (email) => {
   return user.findOne(filter);
 };
 
+// register  the user
 UserController.registerUser = async (value = {}) => {
   if ((!value.name || !value.email, !value.password)) {
     throw new Error('Invalid Data');
@@ -36,6 +39,7 @@ UserController.registerUser = async (value = {}) => {
   return registeredUser;
 };
 
+// get tasks for when user login
 UserController.findAllForListing = async (userId) => {
   const filter = {
     where: {
@@ -45,7 +49,6 @@ UserController.findAllForListing = async (userId) => {
     include: [
       {
         model: task,
-        // attributes: ["title", "description", "priority"],
       },
     ],
     limit: 5,

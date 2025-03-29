@@ -5,6 +5,7 @@ const task = db.Task;
 
 const taskService = {};
 
+// paginated listing tasks
 taskService.listAll = async (req, res, next) => {
   const { query } = req;
   const userId = req.userId;
@@ -14,10 +15,10 @@ taskService.listAll = async (req, res, next) => {
   } catch (error) {
     error.status = 401;
     next(error);
-    // res.status(401).json({ success: 0, message: error.message });
   }
 };
 
+// create task
 taskService.createTask = async (req, res, next) => {
   const value = req.body;
   value.userId = req.userId;
@@ -31,10 +32,10 @@ taskService.createTask = async (req, res, next) => {
   } catch (error) {
     error.status = 400;
     next(error);
-    // res.status(400).json({ succes: 0, message: "invalid data" });
   }
 };
 
+// get task by id
 taskService.findTask = async (req, res, next) => {
   try {
     const { id } = req.params;
@@ -47,10 +48,10 @@ taskService.findTask = async (req, res, next) => {
   } catch (error) {
     error.status = 404;
     next(error);
-    // res.status(404).json({ succes: 0, message: "not found" });
   }
 };
 
+// update task by id
 taskService.updateTask = async (req, res, next) => {
   try {
     const { id } = req.params;
@@ -69,10 +70,10 @@ taskService.updateTask = async (req, res, next) => {
   } catch (error) {
     error.status = 404;
     next(error);
-    // res.status(404).json({ succes: 0, message: "not found" });
   }
 };
 
+//  soft delete task by id
 taskService.deleteTask = async (req, res, next) => {
   try {
     const { id } = req.params;
@@ -90,7 +91,6 @@ taskService.deleteTask = async (req, res, next) => {
   } catch (error) {
     error.status = 404;
     next(error);
-    // res.status(404).json({ succes: 0, message: "task not found" });
   }
 };
 export default taskService;
