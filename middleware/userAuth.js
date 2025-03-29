@@ -8,7 +8,7 @@ export const validateSignUP = async (req, res, next) => {
   try {
     const userName = await UserController.findOneByName(name);
     if (userName) {
-      throw new Error('Invalid request: email is already in use.');
+      throw new Error('Invalid request: username is already in use.');
     }
     const user = await UserController.findOneByEmail(email);
     if (user) {

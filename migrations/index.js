@@ -28,7 +28,7 @@ db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 db.Op = Op;
 db.sequelize
-  .sync({ force: false }) // Drops and recreates tables on restart
+  .sync({ force: true }) // Drops and recreates tables on restart
   .then(async () => {
     console.log('Database connected');
   })
