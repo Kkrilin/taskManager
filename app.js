@@ -3,10 +3,7 @@ import swaggerUI from 'swagger-ui-express';
 import swaggerSpec from './swagger.js';
 import config from './config.js';
 import cookieParser from 'cookie-parser';
-import path from 'path';
-import fs from 'fs';
 import morgan from 'morgan';
-import { fileURLToPath } from 'url';
 
 import userRouter from './routes/users.js';
 import taskRouter from './routes/tasks.js';
@@ -16,15 +13,7 @@ import errorHandler from './middleware/errorHandler.js';
 const app = express();
 const port = config.port;
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-const accessLogStream = fs.createWriteStream(
-  path.join(__dirname, 'logs', 'access.log'),
-  { flags: 'a' }
-);
-
-app.use(morgan('combined', { stream: accessLogStream })); // Logs to a file
+app.use(morgan('combined')); // Logs to a file
 app.use(morgan('dev'));
 
 app.use(cookieParser());
