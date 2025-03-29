@@ -13,8 +13,7 @@ import errorHandler from './middleware/errorHandler.js';
 const app = express();
 const port = config.port;
 
-app.use(morgan('combined')); // Logs to a file
-app.use(morgan('dev'));
+app.use(morgan(config.env || 'combined'));
 
 app.use(cookieParser());
 app.use(express.json());
