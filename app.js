@@ -60,18 +60,11 @@ if (process.env.NODE_ENV !== 'production') {
   );
 }
 
-// Example usage of the logger
 // Middleware to log requests
 app.use((req, res, next) => {
   logger.info(` Logger initialized successfully ${req.method} ${req.url}`);
   next();
 });
-// Middleware to log errors
-// app.use((err, req, res, next) => {
-//   // logger.error('This is an error message');
-//   logger.error(err.stack);
-//   next(err);
-// });
 
 app.use(morgan(config.env === 'development' ? 'dev' : 'combined'));
 
@@ -79,8 +72,8 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
+app.use(express.static('public'));
 // Serve Swagger documentation
-
 app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerSpec));
 
 app.use('/running', (req, res) => {
