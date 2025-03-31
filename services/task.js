@@ -1,5 +1,5 @@
 import taskController from '../controllers/task.js';
-import db from '../migrations/index.js';
+import db from '../models/index.js';
 
 const task = db.Task;
 

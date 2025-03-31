@@ -1,6 +1,6 @@
 import UserController from '../controllers/user.js';
 import jwt from 'jsonwebtoken';
-import config from '../config.js';
+import config from '../config/config.js';
 
 // validate register request
 export const validateSignUP = async (req, res, next) => {
@@ -38,7 +38,6 @@ export const validateLogin = async (req, res, next) => {
 
 // authenticate protected routes
 export const authenticate = async (req, res, next) => {
-  console.log('task.......');
   const token = req.cookies.jwt;
   if (!token)
     return res

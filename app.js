@@ -1,7 +1,7 @@
 import express from 'express';
 import swaggerUI from 'swagger-ui-express';
 import swaggerSpec from './swagger.js';
-import config from './config.js';
+import config from './config/config.js';
 import cookieParser from 'cookie-parser';
 import morgan from 'morgan';
 import cors from 'cors';
@@ -12,7 +12,7 @@ import { authenticate } from './middleware/userAuth.js';
 import errorHandler from './middleware/errorHandler.js';
 
 const app = express();
-const port = config.port;
+const port = config.serverPort;
 
 app.use(morgan(config.env || 'combined'));
 
