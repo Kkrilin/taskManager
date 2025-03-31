@@ -13,8 +13,8 @@ services:
       context: .
     environment:
       NODE_ENV: ${NODE_ENV}
-      SERVER_PORT: ${SERVER_PORT}
-      DB_HOST: ${DB_HOST}
+      SERVER_PORT: 3001
+      DB_HOST: db
       DB_HOST1: ${DB_HOST1}
       DB_PORT: ${DB_PORT}
       DB_USER: ${DB_USER}
@@ -30,6 +30,7 @@ services:
       DB_URL2: ${DB_URL2}
       JWT_EXPIRATION: ${JWT_EXPIRATION}
       SERVER_URL: ${SERVER_URL}
+      # SSL: false
     ports:
       - ${SERVER_PORT}:${SERVER_PORT}
     depends_on:

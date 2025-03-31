@@ -12,7 +12,7 @@ import { authenticate } from './middleware/userAuth.js';
 import errorHandler from './middleware/errorHandler.js';
 
 const app = express();
-const port = config.port || 3000;
+const port = config.serverPort || 3000;
 
 app.use(morgan(config.env === 'development' ? 'dev' : 'combined'));
 

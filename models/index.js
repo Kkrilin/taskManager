@@ -12,12 +12,14 @@ const sequelize = new Sequelize(
     port: config.port,
     dialect: config.dialect,
     logging: false,
-    dialectOptions: {
-      ssl: {
-        require: true,
-        rejectUnauthorized: false,
-      },
-    },
+    dialectOptions: config.ssl
+      ? {
+          ssl: {
+            require: config.ssl,
+            rejectUnauthorized: false,
+          },
+        }
+      : {},
     pool: {
       max: 15, // Maximum number of connections in the pool for production
       min: 5, // Minimum number of connections in the pool for production
