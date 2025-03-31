@@ -1,26 +1,21 @@
-import { defineConfig } from 'eslint/config';
-import globals from 'globals';
 import js from '@eslint/js';
-import prettier from 'eslint-plugin-prettier';
-import prettierConfig from 'eslint-config-prettier';
 
-export default defineConfig([
+export default [
+  js.configs.recommended,
   {
-    files: ['**/*.{js,mjs,cjs}'],
-    ignores: ['node_modules/', 'dist/'], // Ignore these directories
-    languageOptions: {
-      globals: globals.node,
-    },
-    plugins: {
-      js,
-      prettier,
-    },
     rules: {
-      ...js.configs.recommended.rules, // Use recommended JS rules
-      'prettier/prettier': 'error', // Run Prettier as an ESLint rule
-      // quotes: ['error', 'single'], // Enforce single quotes
-      // semi: ['error', 'always'], // Enforce semicolons
+      // ✅ Copying Google's main rules (without deprecated ones)
+      'require-jsdoc': 'off', // 🚀 Fixing your error
+      'valid-jsdoc': 'off', // 🚀 Prevent previous error
+
+      quotes: ['error', 'single'],
+      semi: ['error', 'always'],
+      indent: ['error', 2],
+      'max-len': ['error', { code: 80 }],
+      'no-trailing-spaces': 'error',
+      'no-unused-vars': 'warn',
+      'no-console': 'warn',
+      'arrow-parens': ['error', 'always'],
     },
-    extends: [prettierConfig], // Disable ESLint rules that conflict with Prettier
   },
-]);
+];

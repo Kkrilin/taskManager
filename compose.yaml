@@ -11,6 +11,9 @@ services:
   server:
     build:
       context: .
+    volumes:
+      - .:/usr/src/app # Bind mount your local server code
+      - /usr/src/app/node_modules # Ensure node_modules is not overwritten
     environment:
       NODE_ENV: ${NODE_ENV}
       SERVER_PORT: 3001
@@ -33,6 +36,7 @@ services:
       # SSL: false
     ports:
       - ${SERVER_PORT}:${SERVER_PORT}
+    command: ['npm', 'run', 'dev'] # Use nodemon for development
     depends_on:
       db:
         condition: service_healthy
@@ -48,10 +52,9 @@ services:
     expose:
       - ${DB_PORT}
     healthcheck:
-      test: [ "CMD-SHELL", "pg_isready -U ${POSTGRES_USER} || exit 1" ]
+      test: ['CMD-SHELL', 'pg_isready -U ${POSTGRES_USER} || exit 1']
       interval: 15s
       timeout: 10s
       retries: 10
 volumes:
   postgres-data:
-
