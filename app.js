@@ -12,9 +12,9 @@ import { authenticate } from './middleware/userAuth.js';
 import errorHandler from './middleware/errorHandler.js';
 
 const app = express();
-const port = config.port;
+const port = config.port || 3000;
 
-app.use(morgan(config.env || 'combined'));
+app.use(morgan(config.env === 'development' ? 'dev' : 'combined'));
 
 app.use(cookieParser());
 app.use(express.json());
@@ -25,7 +25,7 @@ app.use(cors());
 app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerSpec));
 
 app.use('/running', (req, res) => {
-  res.status(200).send(`<h1>Server is running</h1>`);
+  res.status(200).send(`<h1>Servwwer is runningnn</h1>`);
 });
 app.use('/auth', userRouter);
 app.use('/tasks', authenticate, taskRouter);
