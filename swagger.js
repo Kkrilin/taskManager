@@ -15,7 +15,7 @@ const swaggerOptions = {
         description: 'Development server',
       },
       {
-        url: config.url, // Replace with your server URL
+        url: config.serverUrl, // Replace with your server URL
         description: 'production Server',
       },
     ],
