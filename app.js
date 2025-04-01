@@ -5,25 +5,16 @@ import config from './config/config.js';
 import cookieParser from 'cookie-parser';
 import morgan from 'morgan';
 import cors from 'cors';
-import * as winston from 'winston';
-import 'winston-daily-rotate-file';
+import { logger, transport } from './config/logger.js';
 
 import userRouter from './routes/users.js';
 import taskRouter from './routes/tasks.js';
-import { authenticate } from './middleware/userAuth.js';
+import {authenticate} from './middleware/userAuth.js';
 import errorHandler from './middleware/errorHandler.js';
 
 const app = express();
 const port = config.serverPort || 3000;
 
-const transport = new winston.transports.DailyRotateFile({
-  level: 'info',
-  filename: 'logs/application-%DATE%.log', // Store logs in a 'logs' directory
-  datePattern: 'YYYY-MM-DD-HH',
-  zippedArchive: true,
-  maxSize: '20m',
-  maxFiles: '14d',
-});
 
 // Handle errors in the transport
 transport.on('error', (error) => {
@@ -35,30 +26,6 @@ transport.on('rotate', (oldFilename, newFilename) => {
   console.log(`Log file rotated: ${oldFilename} -> ${newFilename}`);
 });
 
-// Create the logger instance
-const logger = winston.createLogger({
-  level: 'info',
-  format: winston.format.combine(
-    winston.format.timestamp(),
-    winston.format.json()
-  ),
-  defaultMeta: { service: 'user-service' },
-  transports: [
-    transport, // Add the DailyRotateFile transport
-  ],
-});
-
-// Add a console transport for non-production environments
-if (process.env.NODE_ENV !== 'production') {
-  logger.add(
-    new winston.transports.Console({
-      format: winston.format.combine(
-        winston.format.colorize(),
-        winston.format.simple()
-      ),
-    })
-  );
-}
 
 // Middleware to log requests
 app.use((req, res, next) => {
@@ -70,7 +37,7 @@ app.use(morgan(config.env === 'development' ? 'dev' : 'combined'));
 
 app.use(cookieParser());
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({extended: true}));
 app.use(cors());
 app.use(express.static('public'));
 // Serve Swagger documentation

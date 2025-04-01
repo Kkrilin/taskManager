@@ -1,21 +1,26 @@
 import js from '@eslint/js';
+import google from 'eslint-config-google';
 
 export default [
-  js.configs.recommended,
+  js.configs.recommended, // Base recommended rules from ESLint
+  google, // Google style guide as the base configuration
   {
     rules: {
-      // ✅ Copying Google's main rules (without deprecated ones)
-      'require-jsdoc': 'off', // 🚀 Fixing your error
-      'valid-jsdoc': 'off', // 🚀 Prevent previous error
+      // Disable rules from Google's style guide that you don't want
+      'require-jsdoc': 'off', // Disable JSDoc requirement
+      'valid-jsdoc': 'off', // Disable validation of JSDoc comments
 
-      quotes: ['error', 'single'],
-      semi: ['error', 'always'],
-      indent: ['error', 2],
-      'max-len': ['error', { code: 120 }],
-      'no-trailing-spaces': 'error',
-      'no-unused-vars': 'warn',
+      // Custom rules to override Google's defaults
+      'quotes': ['error', 'single'], // Enforce single quotes
+      'semi': ['error', 'always'], // Enforce semicolons
+      'indent': ['error', 2], // Enforce 2-space indentation
+      'max-len': ['error', {code: 120}], // Set max line length to 120 characters
+      'no-trailing-spaces': 'error', // Disallow trailing spaces
+      'no-unused-vars': 'warn', // Warn about unused variables
+      'arrow-parens': ['error', 'always'], // Require parentheses around arrow function arguments
+
+      // Optional: Uncomment to warn about console statements
       // 'no-console': 'warn',
-      'arrow-parens': ['error', 'always'],
     },
   },
 ];

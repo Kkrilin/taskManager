@@ -1,6 +1,6 @@
 import express from 'express';
-import { registerUser, login } from '../services/user.js';
-import { validateSignUP, validateLogin } from '../middleware/userAuth.js';
+import {registerUser, login} from '../services/user.js';
+import {validateSignUP, validateLogin} from '../middleware/userAuth.js';
 
 const router = express();
 

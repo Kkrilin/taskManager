@@ -1,4 +1,4 @@
-export default function (sequelize, DataTypes) {
+export default function(sequelize, DataTypes) {
   const Task = sequelize.define(
     'Task',
     {
@@ -32,7 +32,7 @@ export default function (sequelize, DataTypes) {
     },
     {
       paranoid: true, // Enables soft deletes
-    }
+    },
   );
 
   Task.associate = (models) => {

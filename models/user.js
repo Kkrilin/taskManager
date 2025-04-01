@@ -1,4 +1,4 @@
-export default function (sequelize, DataTypes) {
+export default function(sequelize, DataTypes) {
   const User = sequelize.define(
     'User',
     {
@@ -22,7 +22,7 @@ export default function (sequelize, DataTypes) {
         allowNull: false,
       },
     },
-    {}
+    {},
   );
 
   User.associate = (models) => {
