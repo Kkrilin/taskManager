@@ -77,7 +77,7 @@ app.use(express.static('public'));
 app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerSpec));
 
 app.use('/running', (req, res) => {
-  res.status(200).send(`<h1>server is running</h1>`);
+  res.status(200).send('<h1>server is running</h1>');
 });
 app.use('/auth', userRouter);
 app.use('/tasks', authenticate, taskRouter);
