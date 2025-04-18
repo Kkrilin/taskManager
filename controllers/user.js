@@ -28,7 +28,7 @@ UserController.findOneByEmail = (email) => {
 
 // register  the user
 UserController.registerUser = async (value = {}) => {
-  if ((!value.name || !value.email, !value.password)) {
+  if ((!value.name || !value.email|| !value.password)) {
     throw new Error('Invalid Data');
   }
   value.password = await bcrypt.hash(value.password, 10);

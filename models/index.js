@@ -1,6 +1,6 @@
 import {Sequelize, DataTypes, Op} from 'sequelize';
 import config from '../config/config.js';
-import { logger } from '../config/logger.js';
+import {logger} from '../config/logger.js';
 import user from './user.js';
 import task from './task.js';
 

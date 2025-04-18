@@ -4,7 +4,7 @@ import config from '../config/config.js';
 
 // validate register request
 export const validateSignUP = async (req, res, next) => {
-  const {name, email} = req.body;
+  const { name, email } = req.body;
   try {
     const userName = await UserController.findOneByName(name);
     if (userName) {
@@ -23,7 +23,7 @@ export const validateSignUP = async (req, res, next) => {
 
 // validate login request
 export const validateLogin = async (req, res, next) => {
-  const {email} = req.body;
+  const { email } = req.body;
   try {
     const user = await UserController.findOneByEmail(email);
     if (!user) {
@@ -40,9 +40,7 @@ export const validateLogin = async (req, res, next) => {
 export const authenticate = async (req, res, next) => {
   const token = req.cookies.jwt;
   if (!token) {
-    return res
-      .status(401)
-      .json({succes: 0, message: 'user authentication falied'});
+    res.status(401).json({ succes: 0, message: 'user authentication falied' });
   }
   try {
     const decoded = jwt.verify(token, config.secretKey);

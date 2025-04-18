@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import 'dotenv/config';
 
 const env = process.env.NODE_ENV || 'development';

@@ -9,27 +9,25 @@ import { logger, transport } from './config/logger.js';
 
 import userRouter from './routes/users.js';
 import taskRouter from './routes/tasks.js';
-import {authenticate} from './middleware/userAuth.js';
+import { authenticate } from './middleware/userAuth.js';
 import errorHandler from './middleware/errorHandler.js';
 
 const app = express();
 const port = config.serverPort || 3000;
 
-
 // Handle errors in the transport
 transport.on('error', (error) => {
-  console.error('Error in DailyRotateFile transport:', error);
+  logger.error('Error in DailyRotateFile transport:', error);
 });
 
 // Handle log rotation events
 transport.on('rotate', (oldFilename, newFilename) => {
-  console.log(`Log file rotated: ${oldFilename} -> ${newFilename}`);
+  logger.info(`Log file rotated: ${oldFilename} -> ${newFilename}`);
 });
-
 
 // Middleware to log requests
 app.use((req, res, next) => {
-  logger.info(` Logger initialized successfully ${req.method} ${req.url}`);
+  logger.info(`Logger initialized successfully ${req.method} ${req.url}`);
   next();
 });
 
@@ -37,7 +35,7 @@ app.use(morgan(config.env === 'development' ? 'dev' : 'combined'));
 
 app.use(cookieParser());
 app.use(express.json());
-app.use(express.urlencoded({extended: true}));
+app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 app.use(express.static('public'));
 // Serve Swagger documentation
@@ -68,5 +66,5 @@ app.use((err, req, res, next) => {
 app.use(errorHandler);
 
 app.listen(port, () => {
-  console.log(`app listening on port ${port}`);
+  logger.info(`app listening on port ${port}`);
 });

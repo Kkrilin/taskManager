@@ -15,7 +15,7 @@ export default [
       'semi': ['error', 'always'], // Enforce semicolons
       'indent': ['error', 2], // Enforce 2-space indentation
       'max-len': ['error', {code: 120}], // Set max line length to 120 characters
-      'no-trailing-spaces': 'error', // Disallow trailing spaces
+      // 'no-trailing-spaces': 'error', // Disallow trailing spaces
       'no-unused-vars': 'warn', // Warn about unused variables
       'arrow-parens': ['error', 'always'], // Require parentheses around arrow function arguments
 
