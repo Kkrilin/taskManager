@@ -66,7 +66,8 @@ taskService.updateTask = async (req, res, next) => {
     if (!task) {
       throw new Error('data not found');
     }
-    const updateTask = await taskController.updateById(userId, id, value);
+    let updateTask = await taskController.updateById(userId, id, value);
+    updateTask = await taskController.findOneById(userId, id);
     res.status(200).json({
       succes: 1,
       message: 'task updated successFully',

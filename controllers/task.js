@@ -34,7 +34,7 @@ taskController.findAllForListing = async (userId, query = {}) => {
     where: {
       userId,
     },
-    order: [['createdAt', 'DESC']],
+    order: [['updatedAt', 'DESC']],
     limit,
   };
 
