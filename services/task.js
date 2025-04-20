@@ -10,12 +10,10 @@ taskService.listAll = async (req, res, next) => {
   const { query } = req;
   const userId = req.userId;
   try {
-    const tasks = await taskController.findAllForListing(userId, query);
-    const countTask = await db.Task.count({
-      where: {
-        userId,
-      },
-    });
+    const { tasks, countTask } = await taskController.findAllForListing(
+      userId,
+      query,
+    );
     res.status(200).json({ success: 1, tasks, count: countTask });
   } catch (error) {
     error.status = 401;

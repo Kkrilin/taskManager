@@ -76,7 +76,10 @@ taskController.findAllForListing = async (userId, query = {}) => {
     offset = limit * (page - 1);
     filter.offset = offset;
   }
-  return task.findAll(filter);
+
+  const tasks = await task.findAll(filter);
+  const countTask = await task.count(filter);
+  return { tasks, countTask };
 };
 
 // get task by id
