@@ -1,9 +1,11 @@
 import js from '@eslint/js';
 import google from 'eslint-config-google';
+import prettier from 'eslint-config-prettier';
 
 export default [
   js.configs.recommended, // Base recommended rules from ESLint
   google, // Google style guide as the base configuration
+  prettier,
   {
     rules: {
       // Disable rules from Google's style guide that you don't want
@@ -11,11 +13,11 @@ export default [
       'valid-jsdoc': 'off', // Disable validation of JSDoc comments
 
       // Custom rules to override Google's defaults
-      'quotes': ['error', 'single'], // Enforce single quotes
-      'semi': ['error', 'always'], // Enforce semicolons
-      'indent': ['error', 2], // Enforce 2-space indentation
-      'max-len': ['error', {code: 120}], // Set max line length to 120 characters
-      // 'no-trailing-spaces': 'error', // Disallow trailing spaces
+      quotes: ['error', 'single'], // Enforce single quotes
+      semi: ['error', 'always'], // Enforce semicolons
+      indent: ['error', 2], // Enforce 2-space indentation
+      'max-len': ['error', { code: 120 }], // Set max line length to 120 characters
+      'no-trailing-spaces': 'error', // Disallow trailing spaces
       'no-unused-vars': 'warn', // Warn about unused variables
       'arrow-parens': ['error', 'always'], // Require parentheses around arrow function arguments
 

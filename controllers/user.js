@@ -53,7 +53,7 @@ UserController.findAllForListing = async (userId) => {
     ],
     limit: 5,
   };
-  return user.findAll(filter);
+  return user.findOne(filter);
 };
 
 export default UserController;

@@ -9,7 +9,7 @@ const taskController = {};
 
 // taskController.createTask = async () => {}
 
-const limit = 5;
+const limit = 10;
 let offset = 0;
 
 const sortingObjMap = {
@@ -34,8 +34,8 @@ taskController.findAllForListing = async (userId, query = {}) => {
     where: {
       userId,
     },
-    order: [['id', 'DESC']],
-    limit: 5,
+    order: [['createdAt', 'DESC']],
+    limit,
   };
 
   if (query.priority) {

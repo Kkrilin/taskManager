@@ -7,11 +7,16 @@ const taskService = {};
 
 // paginated listing tasks
 taskService.listAll = async (req, res, next) => {
-  const {query} = req;
+  const { query } = req;
   const userId = req.userId;
   try {
     const tasks = await taskController.findAllForListing(userId, query);
-    res.status(200).json({success: 1, tasks});
+    const countTask = await db.Task.count({
+      where: {
+        userId,
+      },
+    });
+    res.status(200).json({ success: 1, tasks, count: countTask });
   } catch (error) {
     error.status = 401;
     next(error);
@@ -23,12 +28,12 @@ taskService.createTask = async (req, res, next) => {
   const value = req.body;
   value.userId = req.userId;
   try {
-    const {userId} = value;
+    const { userId } = value;
     if (!userId) {
       throw new Error('user not found');
     }
     const createTask = await task.create(value);
-    res.status(201).json({success: 1, task: createTask});
+    res.status(201).json({ success: 1, task: createTask });
   } catch (error) {
     error.status = 400;
     next(error);
@@ -38,13 +43,13 @@ taskService.createTask = async (req, res, next) => {
 // get task by id
 taskService.findTask = async (req, res, next) => {
   try {
-    const {id} = req.params;
-    const {userId} = req;
+    const { id } = req.params;
+    const { userId } = req;
     const task = await taskController.findOneById(userId, id);
     if (!task) {
       throw new Error('data not found');
     }
-    res.status(200).json({succes: 1, task});
+    res.status(200).json({ succes: 1, task });
   } catch (error) {
     error.status = 404;
     next(error);
@@ -54,8 +59,8 @@ taskService.findTask = async (req, res, next) => {
 // update task by id
 taskService.updateTask = async (req, res, next) => {
   try {
-    const {id} = req.params;
-    const {userId} = req;
+    const { id } = req.params;
+    const { userId } = req;
     const value = req.body;
     const task = await taskController.findOneById(userId, id);
     if (!task) {
@@ -76,15 +81,15 @@ taskService.updateTask = async (req, res, next) => {
 //  soft delete task by id
 taskService.deleteTask = async (req, res, next) => {
   try {
-    const {id} = req.params;
-    const {userId} = req;
+    const { id } = req.params;
+    const { userId } = req;
     const task = await taskController.findOneById(userId, id);
     if (!task) {
       throw new Error('data not found');
     }
     const deleteTask = await taskController.deleteById(userId, id);
     if (deleteTask) {
-      res.status(200).json({succes: 1, message: 'task deleted successFully'});
+      res.status(200).json({ succes: 1, message: 'task deleted successFully' });
     } else {
       throw new Error('task not found');
     }

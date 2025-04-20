@@ -36,7 +36,12 @@ app.use(morgan(config.env === 'development' ? 'dev' : 'combined'));
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors());
+app.use(
+  cors({
+    origin: 'http://localhost:5173', // frontend origin
+    credentials: true, // 🔥 allows cookies to be accepted
+  }),
+);
 app.use(express.static('public'));
 // Serve Swagger documentation
 app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerSpec));
@@ -45,6 +50,9 @@ app.use('/running', (req, res) => {
   res.status(200).send('<h1>server is running</h1>');
 });
 app.use('/auth', userRouter);
+
+// protected Route
+// app.use('/users', authenticate, userRouter);
 app.use('/tasks', authenticate, taskRouter);
 
 // Middleware to handle "route not found" errors and log them
