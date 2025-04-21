@@ -17,6 +17,7 @@ const config = {
     secretKey: process.env.SECRET_KEY,
     jwtExpiration: process.env.JWT_EXPIRATION,
     ssl: process.env.SSl,
+    clientUrl: process.env.CLIENT_URL,
   },
   production: {
     serverPort: process.env.SERVER_PORT,
@@ -30,6 +31,7 @@ const config = {
     dbUrl: process.env.DB_URL,
     secretKey: process.env.SECRET_KEY,
     jwtExpiration: process.env.JWT_EXPIRATION,
+    clientUrl: process.env.CLIENT_URL,
   },
 };
 

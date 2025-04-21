@@ -38,7 +38,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(
   cors({
-    origin: 'http://localhost:5173', // frontend origin
+    origin: config.clientUrl, // frontend origin
     credentials: true, // 🔥 allows cookies to be accepted
   }),
 );
