@@ -1,8 +1,9 @@
-import {Sequelize, DataTypes, Op} from 'sequelize';
+import { Sequelize, DataTypes, Op } from 'sequelize';
 import config from '../config/config.js';
-import {logger} from '../config/logger.js';
+import { logger } from '../config/logger.js';
 import user from './user.js';
 import task from './task.js';
+import fs from 'fs';
 
 const sequelize = new Sequelize(
   config.database,
@@ -13,14 +14,17 @@ const sequelize = new Sequelize(
     port: config.port,
     dialect: config.dialect,
     logging: false,
-    dialectOptions: config.ssl ?
-      {
-        ssl: {
-          require: config.ssl,
-          rejectUnauthorized: false,
-        },
-      } :
-      {},
+    ssl: config.ssl === 'true',
+    dialectOptions:
+      config.ssl === 'true'
+        ? {
+          ssl: {
+            // require: config.ssl === 'true',
+            rejectUnauthorized: true,
+            ca: fs.readFileSync('./ca.pem').toString(),
+          },
+        }
+        : {},
     pool: {
       max: 15, // Maximum number of connections in the pool for production
       min: 5, // Minimum number of connections in the pool for production
